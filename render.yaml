@@ -2,6 +2,7 @@ services:
   - type: web
     name: demo-voice-agent
     runtime: node
+    plan: free
     buildCommand: cd backend && npm ci && npm run db:generate && npm run build && cd ../frontend && npm ci && npm run build
     startCommand: cd backend && npm run db:deploy && npm run db:seed && node dist/main
     envVars:
