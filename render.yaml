@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: demo-voice-agent
+    runtime: node
+    buildCommand: cd backend && npm ci && npm run db:generate && npm run build && cd ../frontend && npm ci && npm run build
+    startCommand: cd backend && npm run db:deploy && npm run db:seed && node dist/main
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        value: file:./prisma/dev.db
+      - key: FRONTEND_DIST_PATH
+        value: ../frontend/dist
+      - key: DEEPGRAM_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_BASE_URL
+        value: https://api.deepseek.com
+      - key: DEEPSEEK_MODEL
+        value: deepseek-v4-flash
+    healthCheckPath: /api/v1/health

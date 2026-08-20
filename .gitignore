@@ -1,0 +1,12 @@
+**/node_modules/
+**/dist/
+**/coverage/
+**/*.log
+**/*.db
+**/*.db-journal
+
+**/.env
+**/.env.*
+!**/.env.example
+
+backend/src/generated/prisma/

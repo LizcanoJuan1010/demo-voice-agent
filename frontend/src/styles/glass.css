@@ -1,0 +1,27 @@
+@layer components {
+  .glass-card {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid #333333;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-header {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+  }
+
+  .ai-glow {
+    box-shadow:
+      0 0 40px rgba(255, 255, 255, 0.08),
+      0 0 80px rgba(255, 255, 255, 0.04);
+  }
+
+  .mist-overlay {
+    background: radial-gradient(
+      ellipse at top,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 55%
+    );
+  }
+}
