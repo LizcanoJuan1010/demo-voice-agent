@@ -8,8 +8,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const variantClass: Record<Variant, string> = {
-  primary: 'bg-white text-black hover:opacity-90 shadow-sm',
-  cta: 'bg-white text-black font-bold shadow-md shadow-white/10 hover:scale-[1.02] active:scale-95',
+  primary: 'bg-white text-black font-semibold shadow-lg shadow-black/25 hover:opacity-90',
+  cta: 'border border-white/10 bg-white/5 text-white backdrop-blur-xl hover:bg-white/10',
   ghost: 'bg-transparent border border-outline-variant text-white hover:bg-white/5',
   danger: 'bg-error text-on-error hover:bg-error/90 shadow-lg',
 }

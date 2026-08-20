@@ -10,6 +10,8 @@ import { LiveCall, type LiveCallHandle, type LiveState } from '../features/call/
 import { useDemoCall } from '../features/call/useDemoCall'
 import { ChatPanel } from '../features/chat/ChatPanel'
 import { useChat } from '../features/chat/useChat'
+import StrokeText from '../components/ui/StrokeText'
+import { ThreeBackground } from '../components/ui/ThreeBackground'
 
 type Mode = 'voice' | 'chat'
 
@@ -116,96 +118,67 @@ export function VoiceAgentPage() {
 
   return (
     <div className="relative min-h-svh bg-background text-on-background">
-      <div className="mist-overlay pointer-events-none absolute inset-0" />
+      <ThreeBackground />
+      <div className="aurora pointer-events-none fixed inset-0" />
 
-      <header className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-outline-variant/40 bg-background/70 px-margin-mobile py-4 backdrop-blur-md md:px-margin-desktop">
-        <div className="flex items-center gap-2">
-          <span className="text-display-lg-mobile font-extrabold tracking-tighter text-white md:text-display-lg">
-            Demo Voice Agent
-          </span>
-          <div className="rounded-full bg-white/10 px-2 py-0.5">
-            <span className="text-label-sm uppercase text-white">{chipLabel}</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1 rounded-full border border-outline-variant bg-surface-container-low p-1">
-            <button
-              type="button"
-              onClick={() => setMode('voice')}
-              className={`rounded-full px-4 py-1.5 text-label-sm transition-colors ${
-                mode === 'voice'
-                  ? 'bg-white font-bold text-black'
-                  : 'text-on-surface-variant hover:text-white'
-              }`}
-            >
-              Voice
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode('chat')}
-              className={`rounded-full px-4 py-1.5 text-label-sm transition-colors ${
-                mode === 'chat'
-                  ? 'bg-white font-bold text-black'
-                  : 'text-on-surface-variant hover:text-white'
-              }`}
-            >
-              Chat
-            </button>
-          </div>
-        </div>
-      </header>
+      <main className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-margin-mobile pt-16 pb-28 md:pt-24">
+        <div className="fade-up flex w-full flex-col items-center">
+          <StrokeText
+            text="Demo Voice Agent"
+            fontSize={84}
+            fontWeight={800}
+            letterSpacing={-2}
+            strokeColor="#A78BFA"
+            fillColor="#F8FAFC"
+            strokeWidth={1.2}
+            drawDuration={1.6}
+            fillDelay={0.25}
+            stagger={0.05}
+            ease="power2.out"
+            fillMode="wipe"
+            trigger="mount"
+            className="w-full max-w-2xl"
+          />
 
-      <main className="relative z-10 mx-auto grid w-full max-w-container-max flex-grow grid-cols-1 gap-gutter px-margin-mobile pt-24 pb-32 md:px-margin-desktop lg:grid-cols-12">
-        <div className="flex flex-col gap-stack-lg lg:col-span-7">
-          {mode === 'voice' ? (
-            <>
-              <div className="relative flex min-h-[440px] flex-col items-center justify-center rounded-3xl border border-outline-variant bg-surface-container-lowest/60 p-stack-lg shadow-lg backdrop-blur-sm">
-                <div style={{ '--orb-size': 'min(46vh, 22rem)' } as CSSProperties}>
-                  <AiOrb state={orbState} />
-                </div>
-                <div className="text-center">
-                  <h2 className="mb-1 text-headline-md text-white">
-                    {config.persona.name} — {config.persona.role}
-                  </h2>
-                  <p className="flex items-center justify-center gap-2 text-label-md text-on-surface-variant">
-                    <span
-                      className={`h-2 w-2 rounded-full ${active ? 'animate-pulse bg-white' : 'bg-outline'}`}
-                    />
-                    {liveError
-                      ? liveError
-                      : demo.status === 'completed'
-                        ? 'Call completed'
-                        : active
-                          ? muted
-                            ? 'Muted'
-                            : lastRole === 'ai'
-                              ? 'Speaking…'
-                              : 'Listening…'
-                          : 'Start a call to begin'}
-                  </p>
-                </div>
-
-                {demo.outcome && (
-                  <div className="mt-4 flex items-center gap-3 rounded-xl border border-outline-variant bg-white/5 px-4 py-3">
-                    <Icon name="task_alt" className="text-white" />
-                    <div>
-                      <p className="text-label-sm uppercase text-on-surface-variant">
-                        Outcome
-                      </p>
-                      <p className="text-body-md font-bold text-white">
-                        {demo.outcome.label} — {demo.outcome.value}
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <TranscriptPanel
-                lines={transcript}
-                emptyHint="The transcript will appear here. Start a live call or play the demo simulation."
+          <div className="mt-8 flex flex-col items-center gap-6">
+            <span className="flex items-center gap-2 text-label-sm uppercase tracking-[0.2em] text-white/45">
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${active ? 'animate-pulse bg-accent' : 'bg-white/30'}`}
               />
-            </>
-          ) : (
+              {chipLabel}
+            </span>
+
+            <div className="glass flex gap-1 rounded-full p-1">
+              <button
+                type="button"
+                onClick={() => setMode('voice')}
+                className={`rounded-full px-5 py-2 text-label-sm font-semibold transition-all duration-300 ${
+                  mode === 'voice'
+                    ? 'bg-white text-black shadow-lg'
+                    : 'text-white/55 hover:text-white'
+                }`}
+              >
+                Voice
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode('chat')}
+                className={`rounded-full px-5 py-2 text-label-sm font-semibold transition-all duration-300 ${
+                  mode === 'chat'
+                    ? 'bg-white text-black shadow-lg'
+                    : 'text-white/55 hover:text-white'
+                }`}
+              >
+                Chat
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {mode === 'chat' ? (
+          <div className="fade-up delay-2 mt-12 w-full">
             <ChatPanel
+              className="glass h-[calc(100svh-16rem)] min-h-[520px]"
               messages={chat.messages}
               isStreaming={chat.isStreaming}
               error={chat.error}
@@ -213,38 +186,106 @@ export function VoiceAgentPage() {
               onSend={chat.send}
               onReset={chat.reset}
             />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="mt-12 flex w-full flex-col gap-8">
+            <div className="fade-up delay-2 glass ai-glow flex w-full flex-col items-center gap-10 rounded-[2rem] px-6 py-14 md:px-14">
+              <div style={{ '--orb-size': 'min(40vh, 20rem)' } as CSSProperties}>
+                <AiOrb state={orbState} />
+              </div>
 
-        <div className="flex flex-col gap-stack-lg lg:col-span-5">
-          <AccountPanel account={config.account} />
+              <div className="text-center">
+                <h2 className="text-headline-md font-bold text-white text-glow">
+                  {config.persona.name}
+                </h2>
+                <p className="mt-1 text-label-md text-white/45">
+                  {config.persona.role}
+                </p>
+                <p className="mt-3 text-label-md text-white/60">
+                  {liveError
+                    ? liveError
+                    : demo.status === 'completed'
+                      ? 'Call completed'
+                      : active
+                        ? muted
+                          ? 'Muted'
+                          : lastRole === 'ai'
+                            ? 'Speaking…'
+                            : 'Listening…'
+                        : 'Start a call to begin'}
+                </p>
+              </div>
 
-          <div className="rounded-2xl border border-outline-variant bg-surface-container-lowest p-5 shadow-lg">
-            <h3 className="mb-3 flex items-center gap-2 text-headline-md text-white">
-              Agent prompt
-              <Icon name="auto_awesome" className="text-white" />
-            </h3>
-            <p className="mb-3 text-label-sm text-on-surface-variant">
-              FDCPA-compliant system prompt for Deepgram Voice Agent / Vapi /
-              Retell / Ultravox.
+              {demo.outcome && (
+                <div className="glass-soft flex items-center gap-3 rounded-2xl px-5 py-3">
+                  <Icon name="task_alt" className="text-white" />
+                  <div>
+                    <p className="text-label-sm uppercase tracking-wide text-white/40">
+                      Outcome
+                    </p>
+                    <p className="text-body-md font-semibold text-white">
+                      {demo.outcome.label} — {demo.outcome.value}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <CallControls
+                liveAvailable={liveAvailable}
+                active={active}
+                liveActive={liveActive}
+                muted={muted}
+                onStartLive={startLive}
+                onStartDemo={demo.start}
+                onStop={stop}
+                onToggleMute={toggleMute}
+              />
+            </div>
+
+            <div className="fade-up delay-3 glass-soft w-full rounded-3xl p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-label-sm font-semibold uppercase tracking-wide text-white/45">
+                <Icon name="subtitles" className="text-[18px]" />
+                Transcript
+              </h3>
+              <TranscriptPanel
+                lines={transcript}
+                emptyHint="The transcript will appear here. Start a live call or play the demo simulation."
+              />
+            </div>
+
+            <div className="fade-up delay-4 grid w-full gap-8 md:grid-cols-2">
+              <AccountPanel account={config.account} />
+
+              <div className="glass-soft flex flex-col rounded-3xl p-6">
+                <h3 className="mb-2 flex items-center gap-2 text-label-sm font-semibold uppercase tracking-wide text-white/45">
+                  Agent prompt
+                  <Icon name="auto_awesome" className="text-[18px]" />
+                </h3>
+                <p className="mb-4 text-label-sm text-white/45">
+                  FDCPA-compliant system prompt for Deepgram Voice Agent / Vapi /
+                  Retell / Ultravox.
+                </p>
+                <button
+                  type="button"
+                  onClick={copyConfig}
+                  className="btn-glow mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-label-md font-semibold text-black"
+                >
+                  <Icon
+                    name={copied ? 'check' : 'content_copy'}
+                    className="text-[20px]"
+                  />
+                  {copied ? 'Copied!' : 'Copy agent config'}
+                </button>
+              </div>
+            </div>
+
+            <p className="fade-up delay-5 px-2 text-center text-label-sm leading-relaxed text-white/35">
+              Compliance — Mini-Miranda disclosure, AI + recording disclosure,
+              right-party verification, no threats or harassment, and a clear
+              promise-to-pay recap. Demo only · not a legal compliance reference.
             </p>
-            <button
-              type="button"
-              onClick={copyConfig}
-              className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5 text-label-md text-black transition-all hover:opacity-90"
-            >
-              <Icon name={copied ? 'check' : 'content_copy'} className="text-[20px]" />
-              {copied ? 'Copied!' : 'Copy agent config'}
-            </button>
           </div>
-
-          <div className="rounded-2xl border border-outline-variant/40 bg-surface-container-low p-5 text-label-sm text-on-surface-variant">
-            <p className="mb-1 font-bold text-white">Compliance</p>
-            Mini-Miranda disclosure, AI + recording disclosure, right-party
-            verification, no threats or harassment, and a clear promise-to-pay
-            recap. Demo only — not a legal compliance reference.
-          </div>
-        </div>
+        )}
       </main>
 
       {liveAvailable && (
@@ -254,19 +295,6 @@ export function VoiceAgentPage() {
           apiKey={config.deepgramApiKey ?? ''}
           onConversation={handleConversation}
           onState={handleLiveState}
-        />
-      )}
-
-      {mode === 'voice' && (
-        <CallControls
-          liveAvailable={liveAvailable}
-          active={active}
-          liveActive={liveActive}
-          muted={muted}
-          onStartLive={startLive}
-          onStartDemo={demo.start}
-          onStop={stop}
-          onToggleMute={toggleMute}
         />
       )}
     </div>

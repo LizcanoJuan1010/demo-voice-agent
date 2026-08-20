@@ -9,6 +9,7 @@ type Props = {
   personaName: string
   onSend: (text: string) => void
   onReset: () => void
+  className?: string
 }
 
 function ThinkingDots() {
@@ -28,6 +29,7 @@ export function ChatPanel({
   personaName,
   onSend,
   onReset,
+  className = '',
 }: Props) {
   const [input, setInput] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -49,8 +51,8 @@ export function ChatPanel({
     .find((m) => m.role === 'assistant')?.id
 
   return (
-    <div className="flex h-[560px] flex-col overflow-hidden rounded-3xl border border-outline-variant bg-surface-container-lowest">
-      <header className="flex items-center gap-3 border-b border-outline-variant/40 px-5 py-3">
+    <div className={`flex flex-col overflow-hidden rounded-3xl ${className}`}>
+      <header className="flex items-center gap-3 border-b border-white/6 px-5 py-3">
         <div className="flex size-9 items-center justify-center rounded-full bg-white text-black">
           <Icon name="psychology" className="text-[20px]" />
         </div>
@@ -75,7 +77,7 @@ export function ChatPanel({
       </header>
 
       <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-        <p className="mb-4 rounded-lg border border-outline-variant/40 bg-white/5 px-3 py-2 text-label-sm text-on-surface-variant">
+        <p className="mb-4 rounded-lg border border-white/6 bg-white/5 px-3 py-2 text-label-sm text-on-surface-variant">
           You are playing{' '}
           <span className="font-bold text-white">James Carter</span>. Start by
           saying "Hi", then respond as the consumer would on the call.
@@ -87,7 +89,7 @@ export function ChatPanel({
                 <div className="flex size-8 flex-shrink-0 items-center justify-center rounded-full bg-white text-black">
                   <Icon name="psychology" className="text-[18px]" />
                 </div>
-                <div className="max-w-[85%] rounded-2xl rounded-tl-none border border-outline-variant bg-surface-container-high p-4 text-body-md text-on-surface">
+                <div className="max-w-[85%] rounded-2xl rounded-tl-none bg-white/6 p-4 text-body-md text-on-surface">
                   {m.content ? (
                     <span className="whitespace-pre-wrap">
                       {m.content}
@@ -117,9 +119,9 @@ export function ChatPanel({
         </div>
       </div>
 
-      <div className="border-t border-outline-variant/40 p-4">
+      <div className="border-t border-white/6 p-4">
         <div className="flex items-end gap-2">
-          <div className="flex flex-1 items-end rounded-2xl border border-outline-variant bg-surface-container-low px-3 py-2 transition-colors focus-within:border-white/50">
+          <div className="flex flex-1 items-end rounded-2xl border border-white/10 bg-white/5 px-3 py-2 transition-colors focus-within:border-white/50">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}

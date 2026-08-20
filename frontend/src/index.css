@@ -63,6 +63,8 @@
   --color-forest-deep: #ffffff;
   --color-amber-cta: #ffffff;
   --color-river-slate: #333333;
+  --color-accent: #a78bfa;
+  --color-accent-soft: rgba(167, 139, 250, 0.35);
 
   /* Radii */
   --radius-sm: 0.25rem;
@@ -75,8 +77,8 @@
   --radius-full: 9999px;
 
   /* Fonts */
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-label: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-label: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Spacing tokens */
   --spacing-margin-mobile: 16px;
@@ -535,4 +537,48 @@
   .call-caption { animation: none; opacity: 1; }
   .chat-msg { animation: none; }
   .typing-cursor { animation: none; }
+}
+
+/* ===== Efectos vistosos de texto y botones ===== */
+.title-gradient {
+  background: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #d4d4d4 25%,
+    #737373 50%,
+    #e5e5e5 75%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: title-shine 7s linear infinite;
+}
+@keyframes title-shine {
+  to { background-position: 200% center; }
+}
+
+.text-glow {
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.35),
+    0 0 48px rgba(255, 255, 255, 0.12);
+}
+
+.btn-glow {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.28),
+    0 0 70px rgba(255, 255, 255, 0.12);
+}
+.btn-glow:active {
+  transform: translateY(0) scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-gradient { animation: none; }
 }

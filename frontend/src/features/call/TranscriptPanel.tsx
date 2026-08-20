@@ -10,9 +10,7 @@ export function TranscriptPanel({ lines, emptyHint }: Props) {
   return (
     <div className="scroll-hide flex max-h-[320px] flex-grow flex-col gap-3 overflow-y-auto p-2">
       {lines.length === 0 && emptyHint && (
-        <p className="text-center text-label-md text-on-surface-variant/70">
-          {emptyHint}
-        </p>
+        <p className="text-center text-label-md text-white/40">{emptyHint}</p>
       )}
       {lines.map((line) =>
         line.role === 'ai' ? (
@@ -20,16 +18,16 @@ export function TranscriptPanel({ lines, emptyHint }: Props) {
             <div className="flex size-8 flex-shrink-0 items-center justify-center rounded-full bg-white text-black">
               <Icon name="psychology" className="text-[18px]" />
             </div>
-            <div className="max-w-[85%] rounded-2xl rounded-tl-none border border-outline-variant bg-surface-container-high p-4 shadow-sm">
-              <p className="text-body-md text-on-surface">{line.text}</p>
+            <div className="max-w-[85%] rounded-2xl rounded-tl-none bg-white/6 px-4 py-3">
+              <p className="text-body-md text-white">{line.text}</p>
             </div>
           </div>
         ) : (
           <div key={String(line.id)} className="flex items-start justify-end gap-3">
-            <div className="max-w-[85%] rounded-2xl rounded-tr-none bg-white p-4 text-black shadow-md">
+            <div className="max-w-[85%] rounded-2xl rounded-tr-none bg-white px-4 py-3 text-black">
               <p className="text-body-md italic">&ldquo;{line.text}&rdquo;</p>
             </div>
-            <div className="flex size-8 flex-shrink-0 items-center justify-center rounded-full bg-surface-variant text-on-surface">
+            <div className="flex size-8 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
               <Icon name="person" className="text-[18px]" />
             </div>
           </div>

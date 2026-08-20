@@ -1,27 +1,64 @@
 @layer components {
-  .glass-card {
-    background: rgba(18, 18, 18, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid #333333;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-soft {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .glass-header {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .ai-glow {
     box-shadow:
-      0 0 40px rgba(255, 255, 255, 0.08),
-      0 0 80px rgba(255, 255, 255, 0.04);
+      0 0 40px rgba(167, 139, 250, 0.14),
+      0 0 90px rgba(167, 139, 250, 0.06);
   }
+}
 
-  .mist-overlay {
-    background: radial-gradient(
-      ellipse at top,
-      rgba(255, 255, 255, 0.06) 0%,
-      transparent 55%
-    );
+/* Fondo "espacio profundo": halos radiales sutiles sobre negro puro */
+.aurora {
+  background:
+    radial-gradient(60% 45% at 50% -5%, rgba(167, 139, 250, 0.16) 0%, transparent 60%),
+    radial-gradient(45% 40% at 85% 20%, rgba(120, 140, 255, 0.09) 0%, transparent 60%),
+    radial-gradient(40% 35% at 12% 65%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+}
+
+/* Entrada suave (fade + slide up) */
+.fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.12s; }
+.delay-3 { animation-delay: 0.2s; }
+.delay-4 { animation-delay: 0.28s; }
+.delay-5 { animation-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+    opacity: 1;
   }
 }
